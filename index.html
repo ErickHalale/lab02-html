@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RevisionMaster - Educational Excellence</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      line-height: 1.6;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .navbar {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      position: relative;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .logo i {
+      margin-right: 0.5rem;
+      color: #ffd700;
+    }
+
+    .tagline {
+      font-style: normal;
+      font-weight: 300;
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-link:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .main-section {
+      display: flex;
+      gap: 30px;
+      padding: 30px;
+      align-items: flex-start;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .sidebar {
+      width: 350px;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .sidebar h3 {
+      margin-bottom: 15px;
+      color: #667eea;
+      font-size: 1.3rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sidebar h3 i {
+      color: #ffd700;
+    }
+
+    .sidebar p {
+      color: #555;
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid #667eea;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+    }
+
+    .fact-button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+
+    .fact-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+    }
+
+    .rotating-carousel {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 25px auto;
+      transform-style: preserve-3d;
+      animation: rotateY 15s linear infinite;
+    }
+
+    .carousel-item {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      top: 50px;
+      left: 50px;
+      transform-style: preserve-3d;
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 3px solid #fff;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .carousel-item img:hover {
+      transform: scale(1.05);
+    }
+
+    .item1 { transform: rotateY(0deg) translateZ(150px); }
+    .item2 { transform: rotateY(60deg) translateZ(150px); }
+    .item3 { transform: rotateY(120deg) translateZ(150px); }
+    .item4 { transform: rotateY(180deg) translateZ(150px); }
+    .item5 { transform: rotateY(240deg) translateZ(150px); }
+    .item6 { transform: rotateY(300deg) translateZ(150px); }
+
+    @keyframes rotateY {
+      from { transform: rotateY(0deg); }
+      to   { transform: rotateY(360deg); }
+    }
+
+    .intro-container {
+      flex: 1;
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .intro-container h2 {
+      margin-bottom: 20px;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #333;
+      line-height: 1.2;
+    }
+
+    .intro-container p {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    .intro-tagline {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 25px;
+      text-align: center;
+      font-weight: 500;
+      margin-top: 20px;
+      display: inline-block;
+      animation: fadeInUp 2s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .subject-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 25px;
+      padding: 40px 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .subject-card {
+      position: relative;
+      background: white;
+      height: 280px;
+      border-radius: 15px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .subject-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .subject-card-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .subject-card h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .subject-card-content {
+      padding: 20px;
+      flex: 1;
+      background: #f8f9fa;
+    }
+
+    .dropdown {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .dropdown a {
+      color: #333;
+      text-decoration: none;
+      padding: 12px 15px;
+      background: white;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      border-left: 4px solid #667eea;
+      font-weight: 500;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .dropdown a:hover {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      transform: translateX(5px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      margin-top: auto;
+      font-weight: 500;
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      .main-section {
+        flex-direction: column;
+        padding: 20px;
+      }
+      
+      .sidebar {
+        width: 100%;
+      }
+      
+      .subject-grid {
+        grid-template-columns: 1fr;
+        padding: 20px;
+      }
+      
+      .navbar {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo"><i class="fas fa-graduation-cap"></i> RevisionMaster</div>
+    <div class="tagline">Learn. Challenge. Grow.</div>
+    <a href="index.html" class="nav-link">Home</a>
+  </nav>
+
+  <!-- SIDEBAR + INTRO CONTAINER -->
+  <div class="main-section">
+    <div class="sidebar">
+      <h3><i class="fas fa-lightbulb"></i> Did You Know?</h3>
+      <p id="fact">Loading fact...</p>
+      <button class="fact-button" onclick="newFact()">New Fact</button>
+
+      <!-- 3D Image Carousel in Sidebar -->
+      <div class="rotating-carousel">
+        <div class="carousel-item item1"><img src="images/11674.jpg" alt="Chemistry Lab"></div>
+        <div class="carousel-item item2"><img src="images/fam.jpg" alt="Study Group"></div>
+        <div class="carousel-item item3"><img src="images/innovative-futuristic-classroom-students.jpg" alt="Modern Classroom"></div>
+        <div class="carousel-item item4"><img src="images/dna-closely.jpg" alt="DNA Structure"></div>
+        <div class="carousel-item item5"><img src="images/did you know.jpg" alt="Learning Facts"></div>
+        <div class="carousel-item item6"><img src="images/close-up-old-paper-map.jpg" alt="Geography Maps"></div>
+      </div>
+    </div>
+
+    <div class="intro-container">
+      <h2>Welcome to RevisionMaster</h2>
+      <p>
+        RevisionMaster is a comprehensive educational platform designed to help students reinforce key concepts across multiple academic disciplines including Biology, Physics, Chemistry, Geography, Computer Studies, and more. Our platform offers interactive quizzes, engaging content, and self-paced learning opportunities to enhance your academic performance.
+      </p>
+      <div class="intro-tagline">Excellence in Education</div>
+    </div>
+  </div>
+
+  <!-- SUBJECT CARDS -->
+  <div class="subject-grid">
+    <div class="subject-card">
+      <div class="subject-card-header">
+        <h2><i class="fas fa-dna"></i> Biology</h2>
+      </div>
+      <div class="subject-card-content">
+        <div class="dropdown">
+          <a href="cell.html">Cell Biology</a>
+          <a href="genetics.html">Genetics</a>
+          <a href="ecology.html">Ecology</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-header">
+        <h2><i class="fas fa-atom"></i> Physics</h2>
+      </div>
+      <div class="subject-card-content">
+        <div class="dropdown">
+          <a href="mechanics.html">Mechanics</a>
+          <a href="forces.html">Forces and Newton's Laws</a>
+          <a href="workenergy.html">Work, Energy and Power</a>
+          <a href="pressure.html">Pressure</a>
+          <a href="waveand sound.html">Wave and Sound</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-header">
+        <h2><i class="fas fa-flask"></i> Chemistry</h2>
+      </div>
+      <div class="subject-card-content">
+        <div class="dropdown">
+          <a href="intro to chem.html">Introduction to Chemistry</a>
+          <a href="state of matter.html">States of Matter</a>
+          <a href="structure of atom.html">Structure of the Atom</a>
+          <a href="periodic table.html">Periodic Table</a>
+          <a href="chemical bonding.html">Chemical Bonding</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-header">
+        <h2><i class="fas fa-globe-americas"></i> Geography</h2>
+      </div>
+      <div class="subject-card-content">
+        <div class="dropdown">
+          <a href="weather and climate.html">Weather and Climate</a>
+          <a href="physical geo.html">Physical Geography</a>
+          <a href="natural resources.html">Natural Resources</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-header">
+        <h2><i class="fas fa-seedling"></i> Agriculture Science</h2>
+      </div>
+      <div class="subject-card-content">
+        <div class="dropdown">
+          <a href="importance of agriculture.html">Importance of Agriculture</a>
+          <a href="soils.html">Soils</a>
+          <a href="farm tools and machinery.html">Farm Tools and Machinery</a>
+          <a href="crop production.html">Crop Production</a>
+          <a href="animal husbandry.html">Animal Husbandry</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-header">
+        <h2><i class="fas fa-laptop-code"></i> Computer Studies</h2>
+      </div>
+      <div class="subject-card-content">
+        <div class="dropdown">
+          <a href="computer hardware.html">Computer Hardware and Software</a>
+          <a href="networking.html">Networking and the Internet</a>
+          <a href="computer security.html">Computer Ethics and Security</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="subject-card">
+      <div class="subject-card-header">
+        <h2><i class="fas fa-chart-line"></i> Commerce</h2>
+      </div>
+      <div class="subject-card-content">
+        <div class="dropdown">
+          <a href="trade.html">Trade</a>
+          <a href="business units.html">Business Units</a>
+          <a href="insurance.html">Insurance</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 RevisionMaster | Designed to help students achieve academic excellence.
+  </footer>
+
+  <script>
+    const funFacts = [
+      "The human brain uses over 20% of the body's total oxygen supply.",
+      "Water expands when frozen, unlike most substances which contract.",
+      "The Internet was originally called ARPANET and was developed by DARPA.",
+      "Mount Everest grows by approximately 4mm each year due to tectonic activity.",
+      "Some extremophile bacteria can survive in the vacuum of space."
+    ];
+
+    function newFact() {
+      const index = Math.floor(Math.random() * funFacts.length);
+      document.getElementById('fact').textContent = funFacts[index];
+    }
+
+    // Initialize with a random fact when page loads
+    window.onload = function() {
+      newFact();
+    };
+  </script>
+</body>
+</html>
